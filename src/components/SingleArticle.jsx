@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchArticleById} from '../api.js';
+import { fetchArticleById, fetchCommentsByArticleId } from '../api.js';
 import Loading from './Loading.jsx';
+import CommentCard from './CommentCard.jsx';
 
 const SingleArticle = () => {
 
     const { article_id } = useParams();
     const [article, setArticle] = useState({});
+    const [comments, setComments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -16,6 +18,11 @@ const SingleArticle = () => {
         .then((article) => {
 
             setArticle(article);
+            return fetchCommentsByArticleId(article_id)
+        })
+        .then((comments) => {
+            
+            setComments(comments);
             setIsLoading(false);
         })
     }, [article_id]);
@@ -37,6 +44,12 @@ const SingleArticle = () => {
                 </section>
                 <p id="article-votes">Votes: {article.votes}</p>
             </article>
+            <section className="comment-setion">
+                <p>Showing {article.comment_count} comments</p>
+                {comments.map((comment) => {
+                    return <CommentCard key={comment.comment_id} comment={comment} />
+                })}
+            </section>
         </div>
     )
 }

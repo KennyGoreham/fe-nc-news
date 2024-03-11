@@ -114,3 +114,33 @@
 #article-votes {
     text-align: right;
 }
+
+/* CommentCard */
+.comment-card {
+    display: grid;
+    grid-template-columns: 150px auto 150px;
+    grid-template-rows: auto auto auto;
+    grid-template-areas: 
+        "author body body"
+        "votes body body"
+        "date body body";
+    border-top: 1px solid #3b3b3b;
+    border-bottom: 3px solid #3b3b3b;
+    margin: 10px;
+}
+
+#comment-author {
+    grid-area: author;
+}
+
+#comment-body {
+    grid-area: body;
+}
+
+#comment-votes {
+    grid-area: votes;
+}
+
+#comment-date {
+    grid-area: date;
+}
