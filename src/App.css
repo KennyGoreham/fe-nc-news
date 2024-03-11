@@ -72,3 +72,45 @@
 #article-date {
     grid-area: date;
 }
+
+/* SingleArticle */
+
+#article-heading {
+    text-align: center;
+    border-bottom: 3px solid #3b3b3b;
+}
+
+#single-article-image {
+    display: block;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#article-body {
+    text-align: center;
+}
+
+.single-article-info {
+    margin-top: 0px;
+    border-bottom: 3px solid #3b3b3b;
+    display: flex;                             
+    flex-wrap: nowrap;              
+    justify-content: space-between;
+}
+
+#article-author {
+    text-align: center;
+}
+
+#article-date {
+    margin: auto;
+}
+
+#article-topic {
+    margin: auto;
+}
+
+#article-votes {
+    text-align: right;
+}

@@ -12,3 +12,12 @@ export const fetchArticles = () => {
         return articles;
     })
 }
+
+export const fetchArticleById = (article_id) => {
+
+    return newsApi
+    .get(`/articles/${article_id}`)
+    .then(({ data: { article } }) => {
+        return article;
+    })
+}
