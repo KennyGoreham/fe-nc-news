@@ -27,30 +27,37 @@ const SingleArticle = () => {
         })
     }, [article_id]);
 
+    const handleNoComments = (comments) => {
+        
+        return comments.length !== 0
+        ? `Showing ${comments.length} comments`
+        : `No comments yet, be the first!`;
+    } 
+
     return isLoading
     ? <Loading />
     : (
-        <div className="single-article-page">
+        <article className="single-article-page">
             <header>
                 <h2 id="article-heading">{article.title}</h2>
+                <h3 id="article-topic">{article.topic}</h3>
                 <img src={article.article_img_url} id="single-article-image"/>
             </header>
-            <article className="single-article">
+            <div className="single-article">
                 <h3 id="article-author">{article.author}</h3>
                 <p id="article-body">{article.body}</p>
                 <section className="single-article-info">
-                    <h4 id="article-topic">{article.topic}</h4>
-                    <h4 id="article-date">{article.created_at}</h4>
+                    <p id="article-date">{article.created_at}</p>
+                    <p id="article-votes">Votes: {article.votes}</p>
                 </section>
-                <p id="article-votes">Votes: {article.votes}</p>
-            </article>
+            </div>
             <section className="comment-setion">
-                <p>Showing {article.comment_count} comments</p>
+                <p>{handleNoComments(comments)}</p>
                 {comments.map((comment) => {
                     return <CommentCard key={comment.comment_id} comment={comment} />
                 })}
             </section>
-        </div>
+        </article>
     )
 }
 
