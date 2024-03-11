@@ -1,0 +1,74 @@
+* {
+    background-color: #ffffff94;
+    color: #3b3b3b;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Header */
+.main-heading {
+    border-bottom: 2px solid #3b3b3b;
+}
+
+.nav-bar {
+    border-bottom: 2px solid #3b3b3b;
+}
+
+/* Home */
+.home-heading {
+    border-bottom: 2px solid #3b3b3b;
+}
+
+/* Loading */
+.loading {
+    margin: 5px;
+    border-bottom: 2px solid #3b3b3b;
+}
+
+/* Articles */
+.article-card-list {
+    padding-inline-start: 0;
+}
+
+.articles-heading {
+    border-bottom: 2px solid #3b3b3b;
+}
+
+/* ArticleCard */
+.article-card {
+    display: block;
+    border-top: 1px solid #3b3b3b;
+    border-bottom: 3px solid #3b3b3b;
+    margin: 10px;
+}
+
+
+.article-info {
+    display: grid;
+    grid-template-columns: 150px auto 100px;
+    grid-template-rows: 150px auto auto;
+    grid-template-areas: 
+    "img title title"
+    "img title title"
+    "date date topic";
+}
+
+#article-img {
+    grid-area: img;
+    width: 150px;
+    height: 150px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#article-title {
+    margin: 15px;
+    grid-area: title;
+}
+
+#article-topic {
+    grid-area: topic;
+}
+
+#article-date {
+    grid-area: date;
+}
