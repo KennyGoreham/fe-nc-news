@@ -14,6 +14,7 @@ const Articles = () => {
         setIsLoading(true);
         fetchArticles()
         .then((articlesData) => {
+            
             setArticles(articlesData);
             setIsLoading(false);
         })

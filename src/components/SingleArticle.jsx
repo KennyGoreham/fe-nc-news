@@ -1,14 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { fetchArticleById, fetchCommentsByArticleId } from '../api.js';
+import { fetchArticleById, patchArticleById } from '../api.js';
 import Loading from './Loading.jsx';
-import CommentCard from './CommentCard.jsx';
+import Comments from './Comments.jsx';
 
 const SingleArticle = () => {
 
     const { article_id } = useParams();
     const [article, setArticle] = useState({});
-    const [comments, setComments] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -18,21 +17,18 @@ const SingleArticle = () => {
         .then((article) => {
 
             setArticle(article);
-            return fetchCommentsByArticleId(article_id)
-        })
-        .then((comments) => {
-            
-            setComments(comments);
             setIsLoading(false);
         })
     }, [article_id]);
 
-    const handleNoComments = (comments) => {
-        
-        return comments.length !== 0
-        ? `Showing ${comments.length} comments`
-        : `No comments yet, be the first!`;
-    } 
+    const voteOnArticle = (article_id, increment) => {
+        setArticle((currArticle) => {
+            return {
+                ...currArticle, votes: article.votes + increment
+            };
+        })
+        patchArticleById(article_id, increment);
+    }
 
     return isLoading
     ? <Loading />
@@ -40,23 +36,26 @@ const SingleArticle = () => {
         <article className="single-article-page">
             <header>
                 <h2 id="article-heading">{article.title}</h2>
-                <h3 id="article-topic">{article.topic}</h3>
+                <h3 id="article-author">{article.author}</h3>
                 <img src={article.article_img_url} id="single-article-image"/>
             </header>
             <div className="single-article">
-                <h3 id="article-author">{article.author}</h3>
                 <p id="article-body">{article.body}</p>
-                <section className="single-article-info">
+                <div className="article-info-container">
+                    <h3 id="article-topic">Topic: {article.topic}</h3>
+                    <div className="vote-button-container">
+                        <button id="article-upvotes-button" onClick={() => {
+                            voteOnArticle(article.article_id, 1);
+                        }}>△</button>
+                        <p id="article-votes">{article.votes}</p>
+                        <button id="article-downvotes-button" onClick={() => {
+                            voteOnArticle(article.article_id, -1);
+                        }}>▽</button>
+                    </div>
                     <p id="article-date">{article.created_at}</p>
-                    <p id="article-votes">Votes: {article.votes}</p>
-                </section>
+                </div>
             </div>
-            <section className="comment-setion">
-                <p>{handleNoComments(comments)}</p>
-                {comments.map((comment) => {
-                    return <CommentCard key={comment.comment_id} comment={comment} />
-                })}
-            </section>
+            <Comments article_id={article_id}/>
         </article>
     )
 }
