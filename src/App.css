@@ -78,6 +78,10 @@
     border-bottom: 3px solid #3b3b3b;
 }
 
+#article-author {
+    text-align: center;
+}
+
 #single-article-image {
     display: block;
     width: 50%;
@@ -89,26 +93,58 @@
     text-align: center;
 }
 
-.single-article-info {
+.article-info-container {
     margin-top: 0px;
     border-bottom: 3px solid #3b3b3b;
-    display: flex;                             
-    flex-wrap: nowrap;              
-    justify-content: space-between;
-}
-
-#article-author {
-    text-align: center;
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;                              
 }
 
 #article-date {
-    flex-direction: row;
-    font-size: 14px;
+    justify-content: right;
+    font-size: 12px;
 }
 
-#article-topic {
-    text-align: center;
-    margin: 10px;
+#article-topic { 
+    margin: 5px;
+    justify-content: left;
+}
+
+.vote-button-container {
+    display: flex;
+}
+
+#article-upvotes-button {
+    margin: 5px;
+    border: none;
+    justify-content: center;
+    font-size: 22px;
+}
+
+#article-votes {
+    justify-content: center;
+}
+
+#article-downvotes-button {
+    margin: 5px;
+    border: none;
+    justify-content: center;
+    font-size: 22px;
+}
+
+#article-upvotes-button:hover {
+    border-top: 1px solid black;
+    border-bottom: 3px solid black;
+    border-left: 1px solid black;
+    border-right: 3px solid black;  
+}
+
+#article-downvotes-button:hover {
+    border-top: 1px solid black;
+    border-bottom: 3px solid black;
+    border-left: 1px solid black;
+    border-right: 3px solid black;  
 }
 
 /* CommentCard */
