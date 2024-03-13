@@ -148,6 +148,14 @@
 }
 
 /* NewComment */
+#post-error-message {
+    text-align: center;
+}
+
+#post-confirmation-message {
+    text-align: center;
+}
+
 .new-comment-form {
     padding: 5px;
     display: grid;
@@ -183,7 +191,23 @@
     border: none;
 }
 
+#post-comment-button:disabled:hover {
+    background-color: lightgray;
+    border: none;
+    font-style: normal;
+}
+
+
 /* CommentCard */
+
+#delete-error-message {
+    text-align: center;
+}
+
+#delete-confirmation-message {
+    text-align: center;
+}
+
 .comment-card {
     display: grid;
     grid-template-columns: 150px auto 4em;
@@ -222,6 +246,17 @@
 #delete-comment-button:hover {
     font-style: oblique;
     border: 3px solid black;
+}
+
+#delete-comment-button:disabled {
+    background-color: lightgray;
+    border: none;
+}
+
+#delete-comment-button:disabled:hover {
+    background-color: lightgray;
+    border: none;
+    font-style: normal;
 }
 
 /* Users */
