@@ -58,6 +58,15 @@ export const postCommentByArticleId = (article_id, commentBody, user) => {
     });
 }
 
+export const deleteCommentByCommentId = (comment_id) => {
+
+    return newsApi
+    .delete(`/comments/${comment_id}`)
+    .then(() => {
+        
+    })
+}
+
 export const fetchUsers = () => {
 
     return newsApi

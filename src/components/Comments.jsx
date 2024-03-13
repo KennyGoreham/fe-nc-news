@@ -42,7 +42,7 @@ const Comments = (props) => {
         <p>{handleNoComments(comments)}</p>
         <NewComment setComments={setComments} article_id={article_id}/>
         {comments.map((comment, index) => {
-            return <CommentCard key={handleCommentKey(comment, index)} comment={comment} />
+            return <CommentCard key={handleCommentKey(comment, index)} comment={comment} setComments={setComments}/>
         })}
         </section>
     )

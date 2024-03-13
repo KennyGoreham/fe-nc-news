@@ -186,12 +186,12 @@
 /* CommentCard */
 .comment-card {
     display: grid;
-    grid-template-columns: 150px auto 150px;
-    grid-template-rows: auto auto auto;
+    grid-template-columns: 150px auto 4em;
+    grid-template-rows: auto auto 5em;
     grid-template-areas:
         "author body body"
         "votes body body"
-        "date body body";
+        "date . delete";
     border-top: 1px solid #3b3b3b;
     border-bottom: 3px solid #3b3b3b;
     margin: 10px;
@@ -211,6 +211,17 @@
 
 #comment-date {
     grid-area: date;
+}
+
+#delete-comment-button {
+    width: 4rem; 
+    height: 4rem;
+    grid-area: delete;
+}
+
+#delete-comment-button:hover {
+    font-style: oblique;
+    border: 3px solid black;
 }
 
 /* Users */
