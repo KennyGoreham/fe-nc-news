@@ -44,9 +44,9 @@
 
 .article-info {
     display: grid;
-    grid-template-columns: 100px auto auto;
+    grid-template-columns: 100px auto 100px;
     grid-template-rows: 100px auto;
-    grid-template-areas: 
+    grid-template-areas:
     "img title title"
     "date . topic";
     padding: 0;
@@ -65,6 +65,7 @@
 
 #article-topic {
     grid-area: topic;
+    align-self: right;
 }
 
 #article-date {
@@ -72,7 +73,6 @@
 }
 
 /* SingleArticle */
-
 #article-heading {
     text-align: center;
     border-bottom: 3px solid #3b3b3b;
@@ -97,8 +97,8 @@
     margin-top: 0px;
     border-bottom: 3px solid #3b3b3b;
     display: flex;
-    flex-direction: row; 
-    justify-content: space-between;                              
+    flex-direction: row;
+    justify-content: space-between;                             
 }
 
 #article-date {
@@ -137,14 +137,50 @@
     border-top: 1px solid black;
     border-bottom: 3px solid black;
     border-left: 1px solid black;
-    border-right: 3px solid black;  
+    border-right: 3px solid black;
 }
 
 #article-downvotes-button:hover {
     border-top: 1px solid black;
     border-bottom: 3px solid black;
     border-left: 1px solid black;
-    border-right: 3px solid black;  
+    border-right: 3px solid black;
+}
+
+/* NewComment */
+.new-comment-form {
+    padding: 5px;
+    display: grid;
+    grid-template-columns: auto 10em;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "label ."
+        "input button";
+    border-top: 1px solid black;
+    border-bottom: 3px solid black;
+}
+
+#new-comment-label {
+    grid-area: label;
+}
+
+#new-comment-input {
+    grid-area: input;
+}
+
+#post-comment-button {
+    border: 1px solid black;
+    border-radius: 2px;
+    grid-area: button;
+}
+
+#post-comment-button:hover {
+    font-style: oblique;
+}
+
+#post-comment-button:disabled {
+    background-color: lightgray;
+    border: none;
 }
 
 /* CommentCard */
@@ -152,7 +188,7 @@
     display: grid;
     grid-template-columns: 150px auto 150px;
     grid-template-rows: auto auto auto;
-    grid-template-areas: 
+    grid-template-areas:
         "author body body"
         "votes body body"
         "date body body";
@@ -175,4 +211,53 @@
 
 #comment-date {
     grid-area: date;
+}
+
+/* Users */
+.user-card-list {
+    padding-inline-start: 0px;
+}
+
+/* SingleUser */
+.user-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#single-user-img {
+    width: 25em;
+    height: 20em;
+}
+
+#login-user-button {
+    margin: 10px;
+}
+
+/* UserCard */
+.user-card-info {
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 110px auto;
+    grid-template-rows: auto;
+    grid-template-areas:
+        "img username";
+    border-top: 1px solid black;
+    border-bottom: 3px solid black;
+    border-left: 1px solid black;
+    border-right: 3px solid black;
+}
+
+#user-card-img {
+    margin: 5px;
+    grid-area: img;
+    width: 100px;
+    height: 100px;
+}
+
+#user-card-username {
+    margin: 0px;
+    padding-inline-start: 20px;
+    grid-area: username;
 }

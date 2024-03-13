@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { fetchArticles } from '../api.js';
 import ArticleCard from './ArticleCard.jsx';
 import Loading from './Loading.jsx';
-import '../App.css';
 
 const Articles = () => {
 

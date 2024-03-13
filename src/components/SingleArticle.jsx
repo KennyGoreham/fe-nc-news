@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { fetchArticleById, patchArticleById } from '../api.js';
 import Loading from './Loading.jsx';
 import Comments from './Comments.jsx';
@@ -36,7 +36,7 @@ const SingleArticle = () => {
         <article className="single-article-page">
             <header>
                 <h2 id="article-heading">{article.title}</h2>
-                <h3 id="article-author">{article.author}</h3>
+                <Link to={`/users/${article.author}`}><h3 id="article-author">{article.author}</h3></Link>
                 <img src={article.article_img_url} id="single-article-image"/>
             </header>
             <div className="single-article">
