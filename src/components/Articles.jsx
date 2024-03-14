@@ -11,29 +11,77 @@ const Articles = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [searchParams, setSearchParams] = useSearchParams();
     const [topicQuery, setTopicQuery] = useState(searchParams.get("topic") || "");
-    const [sortByQuery, setSortByQuery] = useState(searchParams.get("sort_by") || "");
-    const [orderQuery, setOrderQuery] = useState(searchParams.get("order") || "");
+    const [sortByQuery, setSortByQuery] = useState(searchParams.get("sort_by") || "created_at");
+    const [orderQuery, setOrderQuery] = useState(searchParams.get("order") || "desc");
+    const [limitQuery, setLimitQuery] = useState(10);
+    const [pageQuery, setPageQuery] = useState(1);
 
     useEffect(() => {
 
         setIsLoading(true);
+        setLimitQuery(10);
+        setPageQuery(1);
 
-        setSearchParams({
-            /* spread ("assign") all current properties in place, then '&&' 
-            returns the key/value pair on the right if the condition on the left is
-            'truthy', in this case whether the query is not an empty string */
-            ...(topicQuery) && { topic: topicQuery },
-            ...(sortByQuery) && { sort_by: sortByQuery },
-            ...(orderQuery) && { order: orderQuery }
+        setSearchParams(() => {
+            return {
+                ...(topicQuery) && { topic: topicQuery },
+                sort_by: sortByQuery,
+                order: orderQuery,
+                limit: limitQuery,
+                p: pageQuery
+            };
         });
 
-        fetchArticles(topicQuery, sortByQuery, orderQuery, )
+        fetchArticles(topicQuery, sortByQuery, orderQuery)
         .then((articlesData) => {
 
             setArticles(articlesData);
             setIsLoading(false);
-        })
+        });
     }, [topicQuery, sortByQuery, orderQuery]);
+
+    useEffect(() => {
+
+        setIsLoading(true);
+        setPageQuery(1);
+        setSearchParams(() => {
+            return {
+                ...(topicQuery) && { topic: topicQuery },
+                sort_by: sortByQuery,
+                order: orderQuery,
+                limit: limitQuery,
+                p: 1
+            };
+        });
+
+        fetchArticles(topicQuery, sortByQuery, orderQuery, limitQuery)
+        .then((articlesData) => {
+
+            setArticles(articlesData);
+            setIsLoading(false);
+        });
+    }, [limitQuery]);
+
+    useEffect(() => {
+
+        setIsLoading(true);
+        setSearchParams(() => {
+            return {
+                ...(topicQuery) && { topic: topicQuery },
+                sort_by: sortByQuery,
+                order: orderQuery,
+                limit: limitQuery,
+                p: pageQuery
+            };
+        });
+
+        fetchArticles(topicQuery, sortByQuery, orderQuery, limitQuery, pageQuery)
+        .then((articlesData) => {
+
+            setArticles(articlesData);
+            setIsLoading(false);
+        });
+    }, [pageQuery]);
 
     useEffect(() => {
 
@@ -43,20 +91,21 @@ const Articles = () => {
         });
     }, []);
 
-    let numOfArticles = 0;
-    let totalNumOfArticles = 0;
+    const handlePageChange = (totalArticles, pageChange) => {
 
-    if (articles.length !== undefined) {
-
-        numOfArticles = articles.length;
-        totalNumOfArticles = articles[0].total_count
+        if(pageQuery <= Math.ceil(totalArticles / limitQuery)) {
+            setPageQuery(+pageQuery + pageChange);
+        }
     }
+
+    let numOfArticles = 0;
+    if (articles.length !== undefined) numOfArticles = articles.length;
 
     return isLoading
     ? <Loading />
     : (
         <section className="article-page">
-            <h3 className="articles-heading">Showing {numOfArticles} of {totalNumOfArticles} Articles</h3>
+            <h3 className="articles-heading">Displaying {numOfArticles} of {articles[0].total_count} Articles</h3>
             <div className="drop-down-menus">
                 <div className="topic-drop-down">
                     <label htmlFor="topic-select" id="topic-label">Topics</label>
@@ -95,6 +144,29 @@ const Articles = () => {
                         }}>
                             <option value={"desc"}>Descending</option>
                             <option value={"asc"}>Ascending</option>
+                    </select>
+                </div>
+                <div className="page-options-container">
+                    <button id="left-page-button" disabled={pageQuery === 1} onClick={() => {
+                        handlePageChange(articles[0].total_count, -1);
+                    }}>←</button>
+                    <p id="page-text">Page {pageQuery} / {Math.ceil(articles[0].total_count / limitQuery)}</p>
+                    <button id="right-page-button" disabled={pageQuery === Math.ceil(articles[0].total_count / limitQuery)} onClick={() => {
+                        handlePageChange(articles[0].total_count, 1);
+                    }}>→</button>
+                </div>
+                <div className="limit-drop-down">
+                    <label htmlFor="limit-select" id="limit-label">Results per page</label>
+                    <select
+                        id="limit-select"
+                        value={limitQuery}
+                        onChange={(event) => {
+                            setLimitQuery(event.target.value);
+                        }}>
+                            <option value={10}>10</option>
+                            <option value={20}>20</option>
+                            <option value={30}>30</option>
+                            <option value={articles[0].total_count}>All</option>
                     </select>
                 </div>
             </div>
