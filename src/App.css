@@ -51,6 +51,7 @@
     grid-area: select;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     margin: 0.3em;
     padding: 0.2em;
 }
@@ -82,29 +83,93 @@
     margin: 0.2em;
 }
 
+.limit-drop-down {
+    margin: 0.3em;
+    padding: 0.2em;
+    margin-left: auto;
+}
+
+#limit-label {
+    margin: 0.2em;
+}
+
+.page-options-container {
+    margin: 0.3em;
+    padding: 0.2em;
+    display: flex;
+    flex-direction: row;
+}
+
+#left-page-button {
+    margin: 0.2em;
+    border: none;
+}
+
+#left-page-button:hover {
+    border-top: 1px solid black;
+    border-bottom: 3px solid black;
+    border-left: 1px solid black;
+    border-right: 3px solid black;
+}
+
+#left-page-button:disabled {
+    color: lightgray;
+ }
+ 
+ #left-page-button:disabled:hover {
+     border: none;
+  }
+
+#page-text {
+    margin: 0.2em;
+}
+
+#right-page-button {
+    margin: 0.2em;
+    border: none;
+}
+
+#right-page-button:hover {
+    border-top: 1px solid black;
+    border-bottom: 3px solid black;
+    border-left: 1px solid black;
+    border-right: 3px solid black;
+}
+
+#right-page-button:disabled {
+   color: lightgray;
+}
+
+#right-page-button:disabled:hover {
+    border: none;
+ }
+
 /* ArticleCard */
 .article-card {
     display: block;
     border-top: 1px solid #3b3b3b;
     border-bottom: 3px solid #3b3b3b;
-    margin: 10px;
+    margin: 1em;
 }
 
 
 .article-info {
+    border-top: 1px solid #3b3b3b;
+    border-bottom: 3px solid #3b3b3b;
+    margin: 1em;
     display: grid;
-    grid-template-columns: 100px auto 100px;
-    grid-template-rows: 100px auto;
+    grid-template-columns: 7em auto 5em;
+    grid-template-rows: 7em auto;
     grid-template-areas:
-    "img title title"
-    "date . topic";
+    "img title topic"
+    "date . response";
     padding: 0;
 }
 
 #article-img {
     grid-area: img;
-    width: 100px;
-    height: 100px;
+    width: 7rem;
+    height: 7rem;
 }
 
 #article-title {
@@ -114,11 +179,23 @@
 
 #article-topic {
     grid-area: topic;
-    align-self: right;
+    justify-self: right;
 }
 
 #article-date {
     grid-area: date;
+}
+
+#article-comments {
+    grid-area: response;
+    justify-self: right;
+    border-bottom: 1px solid black;
+}
+
+#article-votes {
+    grid-area: response;
+    justify-self: left;
+    border-bottom: 1px solid black;
 }
 
 /* SingleArticle */

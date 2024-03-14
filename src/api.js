@@ -4,12 +4,14 @@ const newsApi = axios.create({
     baseURL: "https://nc-news-yemz.onrender.com/api"
 });
 
-export const fetchArticles = (topicQuery = "", sortByQuery = "", orderQuery = "") => {
+export const fetchArticles = (topicQuery = "", sortByQuery = "", orderQuery = "", limitQuery = 10, pageQuery = 1) => {
 
     const params = { 
         topic: topicQuery,
         sort_by: sortByQuery,
-        order: orderQuery,  
+        order: orderQuery,
+        limit: limitQuery,
+        p: pageQuery 
     };
 
     return newsApi
