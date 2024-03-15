@@ -51,13 +51,14 @@ const SingleArticle = () => {
         <article className="single-article-page">
             <header>
                 <h2 id="single-article-heading">{article.title}</h2>
+                <div className="single-article-header-info">
+                    <Link to={`/articles?topic=${article.topic}`} id="single-article-topic-link"><p id="single-article-topic-text">{article.topic}</p></Link>
+                    <p id="single-article-date">{formattedDate}</p>
+                </div>
                 <Link to={`/users/${article.author}`} id="single-article-author-link"><h3 id="single-article-author-heading">{article.author}</h3></Link>
                 <img src={article.article_img_url} id="single-article-image"/>
             </header>
-            <div className="single-article">
                 <p id="single-article-body">{article.body}</p>
-                <div className="single-article-info-container">
-                    <Link to={`/articles?topic=${article.topic}`} id="single-article-topic-link"><p id="single-article-topic-text">{article.topic}</p></Link>
                     <div className="vote-button-container">
                         <button id="single-article-upvotes-button" onClick={() => {
                             voteOnArticle(article.article_id, 1);
@@ -67,9 +68,6 @@ const SingleArticle = () => {
                             voteOnArticle(article.article_id, -1);
                         }}>▽</button>
                     </div>
-                    <p id="single-article-date">{formattedDate}</p>
-                </div>
-            </div>
             <Comments article_id={article_id}/>
         </article>
     )
