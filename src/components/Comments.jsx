@@ -38,12 +38,12 @@ const Comments = (props) => {
     return isLoading
     ? <Loading />
     : (
-        <section className="comment-setion">
-        <p>{handleNoComments(comments)}</p>
-        <NewComment setComments={setComments} article_id={article_id}/>
-        {comments.map((comment, index) => {
-            return <CommentCard key={handleCommentKey(comment, index)} comment={comment} setComments={setComments}/>
-        })}
+        <section className="comment-section">
+            <p id="comments-heading">{handleNoComments(comments)}</p>
+            <NewComment setComments={setComments} article_id={article_id}/>
+            {comments.map((comment, index) => {
+                return <CommentCard key={handleCommentKey(comment, index)} comment={comment} setComments={setComments}/>
+            })}
         </section>
     )
 }

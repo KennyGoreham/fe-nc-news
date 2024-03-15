@@ -8,6 +8,7 @@ import Users from './components/Users.jsx';
 import SingleUser from './components/SingleUser.jsx';
 import UserContext from './contexts/User.jsx';
 import './App.css';
+import Error from './components/Error.jsx';
 
 const App = () => {
 
@@ -26,6 +27,7 @@ const App = () => {
         <Route path='/articles/:article_id' element={<SingleArticle />} />
         <Route path='/users' element={<Users />} />
         <Route path='/users/:username' element={<SingleUser />} />
+        <Route path='/*' element={<Error status={404} message={'Resource not found.'}/>} />
       </Routes>
     </UserContext.Provider>
   )

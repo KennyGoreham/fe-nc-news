@@ -8,12 +8,12 @@ const Header = () => {
 
     return (
         <header>
-            <h1 className="main-heading">NC News</h1>
+            <h1 id="main-heading">NC News</h1>
             <nav className="nav-bar">
-                <Link to='/'>Home</Link>
-                <Link to='/articles'>Articles</Link>
-                <Link to='/users'>Users</Link>
-                <Link to={`/users/${loggedInUser.username}`}>{loggedInUser.name}</Link>
+                <Link to='/' id="home-nav-link">Home</Link>
+                <Link to='/articles' id="articles-nav-link">Articles</Link>
+                <Link to='/users' id="users-nav-link">Users</Link>
+                <Link to={`/users/${loggedInUser.username}`} id="logged-in-user-nav-link">{loggedInUser.name}</Link>
             </nav>
         </header>
     )
