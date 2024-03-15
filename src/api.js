@@ -75,13 +75,23 @@ export const postCommentByArticleId = (article_id, commentBody, user) => {
     });
 }
 
+export const patchCommentByCommentId = (comment_id, increment) => {
+
+    const patchBody = {
+        inc_votes: increment
+    }
+
+    return newsApi
+    .patch(`/comments/${comment_id}`, patchBody)
+    .then(({ data: { comment } }) => {
+        return comment;
+    });
+}
+
 export const deleteCommentByCommentId = (comment_id) => {
 
     return newsApi
     .delete(`/comments/${comment_id}`)
-    .then(() => {
-        
-    })
 }
 
 export const fetchUsers = () => {

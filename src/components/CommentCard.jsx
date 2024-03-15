@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useContext, useState } from 'react';
 import UserContext from '../contexts/User';
-import { deleteCommentByCommentId } from '../api';
+import { deleteCommentByCommentId, patchCommentByCommentId } from '../api';
 
 const CommentCard = (props) => {
 
@@ -38,6 +38,21 @@ const CommentCard = (props) => {
         });
     }
 
+    const voteOnComment = (comment_id, increment) => {
+
+        setComments((currComments) => {
+            return currComments.map((comment) => {
+
+                if(comment_id === comment.comment_id) {
+                    comment.votes = comment.votes + increment;
+                }   
+
+                return comment;
+            })
+        })
+        patchCommentByCommentId(comment_id, increment);
+    }
+
     const date = new Date(comment.created_at);
     const formattedDate = date.toLocaleString('en-GB');
 
@@ -46,9 +61,18 @@ const CommentCard = (props) => {
             {error ? <p id="delete-error-message">Failed to delete comment - {error}</p> : null}
             {isClicked ? <p id="delete-confirmation-message">Comment deleted!</p> : null}
             <div className="comment-card">
+                {/* <img src={} /> */}
                 <Link to={`/users/${comment.author}`}><p id="comment-author">{comment.author}</p></Link>
                 <p id="comment-body">{comment.body}</p>
-                <p id="comment-votes">{comment.votes}</p>
+                <div className="comment-vote-button-container">
+                        <button id="comment-upvotes-button" onClick={() => {
+                            voteOnComment(comment.comment_id, 1);
+                        }}>△</button>
+                        <p id="comment-votes">{comment.votes}</p>
+                        <button id="comment-downvotes-button" onClick={() => {
+                            voteOnComment(comment.comment_id, -1);
+                        }}>▽</button>
+                    </div>
                 <p id="comment-date">{formattedDate}</p>
                 {renderDeleteButton()}
             </div>
