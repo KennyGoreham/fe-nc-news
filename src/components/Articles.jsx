@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { fetchArticles, fetchTopics } from '../api.js';
 import ArticleCard from './ArticleCard.jsx';
 import Loading from './Loading.jsx';
+import Error from './Error.jsx';
 
 const Articles = () => {
 
@@ -13,8 +14,9 @@ const Articles = () => {
     const [topicQuery, setTopicQuery] = useState(searchParams.get("topic") || "");
     const [sortByQuery, setSortByQuery] = useState(searchParams.get("sort_by") || "created_at");
     const [orderQuery, setOrderQuery] = useState(searchParams.get("order") || "desc");
-    const [limitQuery, setLimitQuery] = useState(10);
-    const [pageQuery, setPageQuery] = useState(1);
+    const [limitQuery, setLimitQuery] = useState(searchParams.get("limit"));
+    const [pageQuery, setPageQuery] = useState(searchParams.get("p"));
+    const [errorInfo, setErrorInfo] = useState({});
 
     useEffect(() => {
 
@@ -37,7 +39,15 @@ const Articles = () => {
 
             setArticles(articlesData);
             setIsLoading(false);
-        });
+        })
+        .catch((err) => {
+
+            setErrorInfo({
+                ...errorInfo,
+                status: err.response.status,
+                message: err.response.data.msg
+            });
+        })
     }, [topicQuery, sortByQuery, orderQuery]);
 
     useEffect(() => {
@@ -59,6 +69,14 @@ const Articles = () => {
 
             setArticles(articlesData);
             setIsLoading(false);
+        })
+        .catch((err) => {
+
+            setErrorInfo({
+                ...errorInfo,
+                status: err.response.status,
+                message: err.response.data.msg
+            });
         });
     }, [limitQuery]);
 
@@ -80,6 +98,14 @@ const Articles = () => {
 
             setArticles(articlesData);
             setIsLoading(false);
+        })
+        .catch((err) => {
+
+            setErrorInfo({
+                ...errorInfo,
+                status: err.response.status,
+                message: err.response.data.msg
+            });
         });
     }, [pageQuery]);
 
@@ -100,6 +126,8 @@ const Articles = () => {
 
     let numOfArticles = 0;
     if (articles.length !== undefined) numOfArticles = articles.length;
+
+    if(Object.keys(errorInfo).length !== 0) return <Error status={errorInfo.status} message={errorInfo.message}/>
 
     return isLoading
     ? <Loading />
@@ -146,28 +174,30 @@ const Articles = () => {
                             <option value={"asc"}>Ascending</option>
                     </select>
                 </div>
-                <div className="page-options-container">
-                    <button id="left-page-button" disabled={pageQuery === 1} onClick={() => {
-                        handlePageChange(articles[0].total_count, -1);
-                    }}>←</button>
-                    <p id="page-text">Page {pageQuery} / {Math.ceil(articles[0].total_count / limitQuery)}</p>
-                    <button id="right-page-button" disabled={pageQuery === Math.ceil(articles[0].total_count / limitQuery)} onClick={() => {
-                        handlePageChange(articles[0].total_count, 1);
-                    }}>→</button>
-                </div>
-                <div className="limit-drop-down">
-                    <label htmlFor="limit-select" id="limit-label">Results per page</label>
-                    <select
-                        id="limit-select"
-                        value={limitQuery}
-                        onChange={(event) => {
-                            setLimitQuery(event.target.value);
-                        }}>
-                            <option value={10}>10</option>
-                            <option value={20}>20</option>
-                            <option value={30}>30</option>
-                            <option value={articles[0].total_count}>All</option>
-                    </select>
+                <div className="page-limit-container">
+                    <div className="page-options-container">
+                        <button id="left-page-button" disabled={pageQuery === 1} onClick={() => {
+                            handlePageChange(articles[0].total_count, -1);
+                        }}>←</button>
+                        <p id="page-text">Page {pageQuery} / {Math.ceil(articles[0].total_count / limitQuery)}</p>
+                        <button id="right-page-button" disabled={pageQuery === Math.ceil(articles[0].total_count / limitQuery)} onClick={() => {
+                            handlePageChange(articles[0].total_count, 1);
+                        }}>→</button>
+                    </div>
+                    <div className="limit-drop-down">
+                        <label htmlFor="limit-select" id="limit-label">Results per page</label>
+                        <select
+                            id="limit-select"
+                            value={limitQuery}
+                            onChange={(event) => {
+                                setLimitQuery(event.target.value);
+                            }}>
+                                <option value={10}>10</option>
+                                <option value={20}>20</option>
+                                <option value={30}>30</option>
+                                <option value={articles[0].total_count}>All</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             <ul className="article-card-list">

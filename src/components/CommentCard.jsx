@@ -38,6 +38,9 @@ const CommentCard = (props) => {
         });
     }
 
+    const date = new Date(comment.created_at);
+    const formattedDate = date.toLocaleString('en-GB');
+
     return (
         <section>
             {error ? <p id="delete-error-message">Failed to delete comment - {error}</p> : null}
@@ -46,7 +49,7 @@ const CommentCard = (props) => {
                 <Link to={`/users/${comment.author}`}><p id="comment-author">{comment.author}</p></Link>
                 <p id="comment-body">{comment.body}</p>
                 <p id="comment-votes">{comment.votes}</p>
-                <p id="comment-date">{comment.created_at}</p>
+                <p id="comment-date">{formattedDate}</p>
                 {renderDeleteButton()}
             </div>
         </section>

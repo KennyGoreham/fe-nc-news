@@ -1,27 +1,80 @@
 * {
-    background-color: #ffffff94;
-    color: #3b3b3b;
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: #E9F1FA;
+    color: #01257D;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 /* Header */
-.main-heading {
-    border-bottom: 2px solid #3b3b3b;
+#main-heading {
+    /* border-bottom: 2px solid #01257D; */
+    text-align: center;
 }
 
 .nav-bar {
-    border-bottom: 2px solid #3b3b3b;
+    display: flex;
+    flex-direction: row;
+}
+
+#home-nav-link {
+    background-color: #00c9a7;
+    color: #E9F1FA;
+    text-decoration: none;
+    border: 2px solid #00c9a7;
+    border-radius: 0.2em;
+}
+
+#home-nav-link:hover {
+    border: 1px solid #01257D;
+}
+
+#articles-nav-link {
+    background-color: #00c9a7;
+    color: #E9F1FA;
+    text-decoration: none;
+    border: 2px solid #00c9a7;
+    border-radius: 0.2em;
+}
+
+#articles-nav-link:hover {
+    border: 1px solid #01257D;
+}
+
+#users-nav-link {
+    background-color: #00c9a7;
+    color: #E9F1FA;
+    text-decoration: none;
+    border: 2px solid #00c9a7;
+    border-radius: 0.2em;
+}
+
+#users-nav-link:hover {
+    border: 1px solid #01257D;
+}
+
+#logged-in-user-nav-link {
+    background-color: #00c9a7;
+    color: #E9F1FA;
+    text-decoration: none;
+    margin-left: auto;
+    border: 2px solid #00c9a7;
+    border-radius: 0.2em;
+}
+
+#logged-in-user-nav-link:hover {
+    border: 1px solid #01257D;
 }
 
 /* Home */
 .home-heading {
-    border-bottom: 2px solid #3b3b3b;
+    text-align: center;
+    border-bottom: 2px solid #01257D;
 }
 
 /* Loading */
 .loading {
     margin: 5px;
-    border-bottom: 2px solid #3b3b3b;
+    border-bottom: 2px solid #01257D;
+    text-align: center;
 }
 
 /* Articles */
@@ -36,7 +89,8 @@
 }
 
 .articles-heading {
-    border-bottom: 2px solid #3b3b3b;
+    text-align: center;
+    border-bottom: 2px solid #01257D;
     grid-area: heading;
 }
 
@@ -83,18 +137,27 @@
     margin: 0.2em;
 }
 
+.page-limit-container {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    flex-flow: column;
+    flex-wrap: wrap;
+}
+
 .limit-drop-down {
     margin: 0.3em;
     padding: 0.2em;
-    margin-left: auto;
 }
 
 #limit-label {
-    margin: 0.2em;
+    margin: 0px;
+    padding: 0.15em;
 }
 
 .page-options-container {
     margin: 0.3em;
+    margin-left: auto;
     padding: 0.2em;
     display: flex;
     flex-direction: row;
@@ -106,10 +169,8 @@
 }
 
 #left-page-button:hover {
-    border-top: 1px solid black;
-    border-bottom: 3px solid black;
-    border-left: 1px solid black;
-    border-right: 3px solid black;
+    background-color: #01257D;
+    color: #E9F1FA;
 }
 
 #left-page-button:disabled {
@@ -130,10 +191,8 @@
 }
 
 #right-page-button:hover {
-    border-top: 1px solid black;
-    border-bottom: 3px solid black;
-    border-left: 1px solid black;
-    border-right: 3px solid black;
+    background-color: #01257D;
+    color: #E9F1FA;
 }
 
 #right-page-button:disabled {
@@ -147,15 +206,12 @@
 /* ArticleCard */
 .article-card {
     display: block;
-    border-top: 1px solid #3b3b3b;
-    border-bottom: 3px solid #3b3b3b;
     margin: 1em;
 }
 
 
 .article-info {
-    border-top: 1px solid #3b3b3b;
-    border-bottom: 3px solid #3b3b3b;
+    border-bottom: .1em dashed #01257D;
     margin: 1em;
     display: grid;
     grid-template-columns: 7em auto 5em;
@@ -173,39 +229,52 @@
 }
 
 #article-title {
-    margin: 15px;
+    margin: 0.5em;
     grid-area: title;
+    text-decoration: none;
+    justify-self:baseline;
 }
 
 #article-topic {
     grid-area: topic;
-    justify-self: right;
+    justify-self: end;
+}
+
+#topic-span {
+    background-color: #00c9a7;
+    color: #E9F1FA;
+    border-radius: 2px;
+    margin-left: auto;
+    padding: 0.2em;
 }
 
 #article-date {
     grid-area: date;
+    justify-items: end;
 }
 
 #article-comments {
     grid-area: response;
-    justify-self: right;
-    border-bottom: 1px solid black;
+    justify-self: end;
+    padding: 0.15em;
+    border-bottom: 1px solid #01257D;
 }
 
 #article-votes {
     grid-area: response;
-    justify-self: left;
-    border-bottom: 1px solid black;
+    justify-self: start;
+    border-bottom: 1px solid #01257D;
 }
 
 /* SingleArticle */
-#article-heading {
+#single-article-heading {
     text-align: center;
-    border-bottom: 3px solid #3b3b3b;
+    border-bottom: 0.1em solid #01257D;
 }
 
-#article-author {
+#single-article-author {
     text-align: center;
+    text-decoration: none;
 }
 
 #single-article-image {
@@ -215,67 +284,83 @@
     margin-right: auto;
 }
 
-#article-body {
+#single-article-body {
     text-align: center;
 }
 
-.article-info-container {
+.single-article-info-container {
     margin-top: 0px;
-    border-bottom: 3px solid #3b3b3b;
+    border-bottom: 3px solid #01257D;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;                             
+    align-items: center;                          
 }
 
-#article-date {
+#single-article-date {
+    margin-left: auto;
     justify-content: right;
     font-size: 12px;
 }
 
-#article-topic { 
-    margin: 5px;
+#single-article-topic { 
+    background-color: #00c9a7;
+    color: #E9F1FA;
+    border-radius: 0.3em;
+    padding: 0.2em;
+    margin-right: auto;
     justify-content: left;
 }
 
 .vote-button-container {
     display: flex;
+    flex-direction: row;
 }
 
-#article-upvotes-button {
+#single-article-upvotes-button {
     margin: 5px;
     border: none;
     justify-content: center;
     font-size: 22px;
 }
 
-#article-votes {
-    justify-content: center;
+#single-article-votes {
+    margin-left: auto;
+    margin-right: auto;
 }
 
-#article-downvotes-button {
+#single-article-downvotes-button {
     margin: 5px;
     border: none;
     justify-content: center;
     font-size: 22px;
 }
 
-#article-upvotes-button:hover {
-    border-top: 1px solid black;
-    border-bottom: 3px solid black;
-    border-left: 1px solid black;
-    border-right: 3px solid black;
+#single-article-upvotes-button:hover {
+    background-color: #00c9a7;
+    color: #E9F1FA;
 }
 
-#article-downvotes-button:hover {
-    border-top: 1px solid black;
-    border-bottom: 3px solid black;
-    border-left: 1px solid black;
-    border-right: 3px solid black;
+#single-article-downvotes-button:hover {
+    background-color: #00c9a7;
+    color: #E9F1FA;
+}
+
+/* Comments */
+.comment-section {
+    padding: 0.2em;
+}
+
+#comments-heading {
+    margin: 1em;
+    padding: 0.3em;
+    text-align: center;
 }
 
 /* NewComment */
 #post-error-message {
     text-align: center;
+    margin: 0.3em;
+    padding: 0.2em;
 }
 
 #post-confirmation-message {
@@ -285,31 +370,42 @@
 .new-comment-form {
     padding: 5px;
     display: grid;
-    grid-template-columns: auto 10em;
+    grid-template-columns: auto auto;
     grid-template-rows: auto auto;
     grid-template-areas:
         "label ."
         "input button";
-    border-top: 1px solid black;
-    border-bottom: 3px solid black;
+    align-items: center;
+    border-top: 1px solid #01257D;
 }
 
 #new-comment-label {
+    margin: 0.3em;
+    padding: 0.2em;
     grid-area: label;
 }
 
 #new-comment-input {
     grid-area: input;
+    margin: 0.3em;
+    padding: 0.2em;
+    border: 1px solid #01257D;
+    border-radius: 0.2em;
 }
 
 #post-comment-button {
-    border: 1px solid black;
-    border-radius: 2px;
+    background-color: #00c9a7;
+    color: #E9F1FA;
+    border-radius: 0.5em;
+    border: none;
     grid-area: button;
+    justify-self: start;
+    width: 5em;
+    height: 3em;
 }
 
 #post-comment-button:hover {
-    font-style: oblique;
+    border: 1px solid #01257D;
 }
 
 #post-comment-button:disabled {
@@ -328,10 +424,14 @@
 
 #delete-error-message {
     text-align: center;
+    margin: 0.3em;
+    padding: 0.2em;
 }
 
 #delete-confirmation-message {
     text-align: center;
+    margin: 0.3em;
+    padding: 0.2em;
 }
 
 .comment-card {
@@ -339,12 +439,13 @@
     grid-template-columns: 150px auto 4em;
     grid-template-rows: auto auto 5em;
     grid-template-areas:
-        "author body body"
+        "author date delete"
         "votes body body"
-        "date . delete";
-    border-top: 1px solid #3b3b3b;
-    border-bottom: 3px solid #3b3b3b;
-    margin: 10px;
+        ". body body";
+    border-bottom: 0.1em dashed #01257D;
+    margin: 0.8em;
+    padding: 0.2em;
+    align-items: center;
 }
 
 #comment-author {
@@ -360,18 +461,22 @@
 }
 
 #comment-date {
+    font-size: 11px;
     grid-area: date;
 }
 
 #delete-comment-button {
-    width: 4rem; 
-    height: 4rem;
+    background-color: #00c9a7;
+    color: #E9F1FA;
+    border: none;
+    border-radius: 0.5em;
+    width: 5em;
+    height: 3em;
     grid-area: delete;
 }
 
 #delete-comment-button:hover {
-    font-style: oblique;
-    border: 3px solid black;
+    border: 1px solid #01257D;
 }
 
 #delete-comment-button:disabled {
@@ -404,7 +509,16 @@
 }
 
 #login-user-button {
-    margin: 10px;
+    margin: 3em;
+    background-color: #00c9a7;
+    color: #E9F1FA;
+    border-radius: 0.3em;
+    border: none;
+    padding: 0.3em;
+}
+
+#login-user-button:hover {
+    border: 1px solid #01257D;
 }
 
 /* UserCard */
@@ -415,10 +529,7 @@
     grid-template-rows: auto;
     grid-template-areas:
         "img username";
-    border-top: 1px solid black;
-    border-bottom: 3px solid black;
-    border-left: 1px solid black;
-    border-right: 3px solid black;
+    border-bottom: .1em dashed #01257D;
 }
 
 #user-card-img {
@@ -432,4 +543,17 @@
     margin: 0px;
     padding-inline-start: 20px;
     grid-area: username;
+}
+
+/* Error */
+#oops-message {
+    text-align: center
+}
+
+#status-code-heading {
+    text-align: center;
+}
+
+#error-message {
+    text-align: center;
 }
