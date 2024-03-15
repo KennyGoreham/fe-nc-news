@@ -133,7 +133,7 @@ const Articles = () => {
     ? <Loading />
     : (
         <section className="article-page">
-            <h3 className="articles-heading">Displaying {numOfArticles} of {articles[0].total_count} Articles</h3>
+            <h3 className="articles-heading">Displaying {numOfArticles} of {articles[0].total_count} articles for {topicQuery || "all topics"}</h3>
             <div className="drop-down-menus">
                 <div className="topic-drop-down">
                     <label htmlFor="topic-select" id="topic-label">Topics</label>
@@ -202,7 +202,7 @@ const Articles = () => {
             </div>
             <ul className="article-card-list">
                 {articles.map((article) => {
-                    return <ArticleCard key={article.article_id} article={article} />
+                    return <ArticleCard key={article.article_id} article={article} setTopicQuery={setTopicQuery} />
                 })}
             </ul>
         </section>

@@ -51,13 +51,13 @@ const SingleArticle = () => {
         <article className="single-article-page">
             <header>
                 <h2 id="single-article-heading">{article.title}</h2>
-                <Link to={`/users/${article.author}`} id="single-article-author"><h3>{article.author}</h3></Link>
+                <Link to={`/users/${article.author}`} id="single-article-author-link"><h3 id="single-article-author-heading">{article.author}</h3></Link>
                 <img src={article.article_img_url} id="single-article-image"/>
             </header>
             <div className="single-article">
                 <p id="single-article-body">{article.body}</p>
                 <div className="single-article-info-container">
-                    <h3 id="single-article-topic">{article.topic}</h3>
+                    <Link to={`/articles?topic=${article.topic}`} id="single-article-topic-link"><p id="single-article-topic-text">{article.topic}</p></Link>
                     <div className="vote-button-container">
                         <button id="single-article-upvotes-button" onClick={() => {
                             voteOnArticle(article.article_id, 1);
