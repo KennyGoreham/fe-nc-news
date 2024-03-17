@@ -62,7 +62,7 @@ const CommentCard = (props) => {
             {isClicked ? <p id="delete-confirmation-message">Comment deleted!</p> : null}
             <div className="comment-card">
                 {/* <img src={} /> */}
-                <Link to={`/users/${comment.author}`}><p id="comment-author">{comment.author}</p></Link>
+                <Link to={`/users/${comment.author}`} id="comment-author-link"><p id="comment-author">{comment.author}</p></Link>
                 <p id="comment-body">{comment.body}</p>
                 <div className="comment-vote-button-container">
                         <button id="comment-upvotes-button" onClick={() => {

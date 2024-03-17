@@ -111,3 +111,12 @@ export const fetchUserByUsername = (username) => {
         return user;
     });
 }
+
+export const fetchCommentsByUsername = (username) => {
+
+    return newsApi
+    .get(`/users/${username}/comments`)
+    .then(({ data: { comments } }) => {
+        return comments;
+    });
+}
