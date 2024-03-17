@@ -8,13 +8,13 @@ const Header = () => {
 
     return (
         <header className="header-container">
-            <h1 id="main-heading">NC News</h1>
+            <Link to='/' id="main-heading-link"><h1 id="main-heading">NC News</h1></Link>
             <nav className="nav-bar">
                 <Link to='/' id="home-nav-link">Home</Link>
                 <Link to='/articles' id="articles-nav-link">Articles</Link>
                 <Link to='/users' id="users-nav-link">Users</Link>
             </nav>
-            <Link to={`/users/${loggedInUser.username}`} id="logged-in-user-nav-link">{loggedInUser.name}</Link>
+            <Link to={`/users/${loggedInUser.username}`} id="logged-in-user-nav-link">Currently logged in as: {loggedInUser.name}</Link>
         </header>
     )
 }
