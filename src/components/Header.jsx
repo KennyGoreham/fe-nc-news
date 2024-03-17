@@ -14,7 +14,7 @@ const Header = () => {
                 <Link to='/articles' id="articles-nav-link">Articles</Link>
                 <Link to='/users' id="users-nav-link">Users</Link>
             </nav>
-            <Link to={`/users/${loggedInUser.username}`} id="logged-in-user-nav-link">Currently logged in as: {loggedInUser.name}</Link>
+            <Link to={`/users/${loggedInUser.username}`} id="logged-in-user-nav-link">Welcome back {loggedInUser.name}!</Link>
         </header>
     )
 }
