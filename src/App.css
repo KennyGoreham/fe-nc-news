@@ -20,6 +20,10 @@
     grid-area: head;
 }
 
+#main-heading-link {
+    text-decoration: none;
+}
+
 .nav-bar {
     display: flex;
     flex-direction: row;
@@ -85,6 +89,67 @@
 .home-heading {
     text-align: center;
     border-bottom: 2px solid #01257D;
+}
+
+/* Trending Articles */
+#trending-articles-heading {
+    text-align: center;
+}
+
+.trendy-article-cards {
+    margin-left: auto;
+    margin-right: auto;
+    padding-inline-start: 0;
+}
+
+/* TrendyCard */
+.trendy-article-info {
+    display: grid;
+    grid-template-columns: 10em auto 7em;
+    grid-template-rows: auto auto;
+    grid-template-areas: 
+        "image title topic"
+        "image title .";
+    align-items: center;
+    box-shadow: 0.3em 0.3em 0.4em 0.1em #01257D;
+    margin: 1em;
+    padding: 0;
+}
+
+#trendy-article-img {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    width: 10em;
+    height: 8em;
+    grid-area: image;
+}
+
+#trendy-article-title {
+    margin: 0.5em;
+    padding: 0.5em;
+    grid-area: title;
+}
+
+#trendy-article-title-link {
+    text-decoration: none;
+}
+
+#trendy-article-topic {
+    justify-self: end;
+    align-self: first baseline;
+    margin: 0.5em;
+    margin-top: 0.2em;
+    grid-area: topic;
+}
+
+#trendy-article-topic-span {
+    background-color: #01dab6;
+    color: #01257D;
+    border-radius: 0.2em;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    margin-left: auto;
+    padding: 0.2em;
 }
 
 /* Loading */
@@ -223,17 +288,11 @@
  }
 
 /* ArticleCard */
-.article-card {
-    display: block;
-    margin: 1em;
-}
-
-
 .article-info {
-    border-bottom: .1em dashed #01257D;
+    box-shadow: 0.3em 0.3em 0.4em 0.1em #01257D;
     margin: 1em;
     display: grid;
-    grid-template-columns: 7em auto 5em;
+    grid-template-columns: 7em auto 7em;
     grid-template-rows: 7em auto;
     grid-template-areas:
     "img title topic"
@@ -256,17 +315,21 @@
 
 #article-topic-link {
     text-decoration: none;
+    justify-self: end;
+    margin-right: 0.5em;
 }
 
 #article-topic {
     grid-area: topic;
-    justify-self: end;
+    margin-top: 0.2em;
 }
 
 #topic-span {
     background-color: #01dab6;
     color: #01257D;
     border-radius: 0.2em;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
     margin-left: auto;
     padding: 0.2em;
 }
@@ -274,19 +337,22 @@
 #article-date {
     grid-area: date;
     justify-items: end;
+    padding: 0.3em;
 }
 
 #article-comments {
     grid-area: response;
     justify-self: end;
+    margin-top: 2em;
+    margin-right: 0.7em;
     padding: 0.15em;
-    border-bottom: 1px solid #01257D;
 }
 
 #article-votes {
     grid-area: response;
     justify-self: start;
-    border-bottom: 1px solid #01257D;
+    margin-left: 0.7em;
+    margin-top: 2em;
 }
 
 /* SingleArticle */
@@ -468,6 +534,7 @@
 }
 
 .comment-card {
+    box-shadow: 0.3em 0.3em 0.4em 0.1em #01257D;
     display: grid;
     grid-template-columns: 150px auto 4em;
     grid-template-rows: auto auto 5em;
@@ -475,18 +542,19 @@
         ". date delete"
         "author body body"
         "votes body body";
-    border-bottom: 0.1em dashed #01257D;
     margin: 0.8em;
-    padding: 0.2em;
     align-items: center;
 }
 
 #comment-author {
     grid-area: author;
+    margin: 0.2em;
+    padding: 0.3em;
 }
 
 #comment-body {
     grid-area: body;
+    padding: 0.3em;
 }
 
 .comment-vote-button-container {
@@ -529,8 +597,10 @@
     color: #01257D;
     border: none;
     border-radius: 0.5em;
-    width: 5em;
-    height: 3em;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    margin-top: 0px;
+    padding: 0.75em;
     grid-area: delete;
 }
 
@@ -588,7 +658,9 @@
     grid-template-rows: auto;
     grid-template-areas:
         "img username";
-    border-bottom: .1em dashed #01257D;
+    margin: 0.8em;
+    padding: 0.2em;
+    box-shadow: 0.3em 0.3em 0.5em 0.1em #01257D;
 }
 
 #user-card-img {
@@ -602,6 +674,10 @@
     margin: 0px;
     padding-inline-start: 20px;
     grid-area: username;
+}
+
+#username-link {
+    text-decoration: none;
 }
 
 /* Error */

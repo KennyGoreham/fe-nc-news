@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Loading from './Loading.jsx';
 import UserContext from '../contexts/User.jsx';
 import Error from './Error.jsx';
@@ -9,6 +9,7 @@ const SingleUser = () => {
 
     const { username } = useParams();
     const { setLoggedInUser } = useContext(UserContext);
+    const navigate = useNavigate();
     const [user, setUser] = useState({});
     const [isLoading, setIsLoading] = useState(true);
     const [errorInfo, setErrorInfo] = useState({});
@@ -41,7 +42,10 @@ const SingleUser = () => {
         <section className="user-info">
             <h3>{user.username}</h3>
             <img src={user.avatar_url} id="single-user-img"/>
-            <button onClick={() => setLoggedInUser(user)} id="login-user-button">Continue as {user.username}</button>
+            <button onClick={() => {
+                setLoggedInUser(user)
+                navigate('/');
+                }} id="login-user-button">Continue as {user.username}</button>
         </section>
     )
 }
