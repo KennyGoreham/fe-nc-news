@@ -5,16 +5,16 @@ import { fetchArticles } from '../api.js';
 
 const TrendingArticles = () => {
 
-    const [trendyArticles, setTrendyArticles] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [trendyArticles, setTrendyArticles] = useState([]);
 
     useEffect(() => {
 
         setIsLoading(true);
         fetchArticles("", "comment_count", "desc", 3, 1)
-        .then((articlesData) => {
+        .then(({ articles }) => {
 
-            setTrendyArticles(articlesData);
+            setTrendyArticles(articles);
             setIsLoading(false); 
         })
     }, []);

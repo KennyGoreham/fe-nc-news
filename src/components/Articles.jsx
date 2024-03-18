@@ -7,37 +7,34 @@ import Error from './Error.jsx';
 
 const Articles = () => {
 
+    const [searchParams, setSearchParams] = useSearchParams({});
+
     const [articles, setArticles] = useState([]);
-    const [topics, setTopics] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [searchParams, setSearchParams] = useSearchParams();
-    const [topicQuery, setTopicQuery] = useState(searchParams.get("topic") || "");
-    const [sortByQuery, setSortByQuery] = useState(searchParams.get("sort_by") || "created_at");
-    const [orderQuery, setOrderQuery] = useState(searchParams.get("order") || "desc");
-    const [limitQuery, setLimitQuery] = useState(searchParams.get("limit"));
-    const [pageQuery, setPageQuery] = useState(searchParams.get("p"));
+    const [currentPage, setCurrentPage] = useState(searchParams.get("p") || 1);
     const [errorInfo, setErrorInfo] = useState({});
+    const [isLoading, setIsLoading] = useState(true);
+    const [limitQuery, setLimitQuery] = useState(searchParams.get("limit") || 10);
+    const [orderQuery, setOrderQuery] = useState(searchParams.get("order") || "desc");
+    const [sortByQuery, setSortByQuery] = useState(searchParams.get("sort_by") || "created_at");
+    const [topicQuery, setTopicQuery] = useState(searchParams.get("topic") || "");
+    const [topics, setTopics] = useState([]);
+    const [totalPages, setTotalPages] = useState(0);
 
     useEffect(() => {
 
-        setIsLoading(true);
-        setLimitQuery(10);
-        setPageQuery(1);
-
-        setSearchParams(() => {
-            return {
+        fetchArticles(topicQuery, sortByQuery, orderQuery, limitQuery, currentPage)
+        .then(({ articles, totalPages}) => {
+            
+            setArticles(articles);
+            setTotalPages(totalPages);
+            setSearchParams({
+                ...searchParams,
                 ...(topicQuery) && { topic: topicQuery },
                 sort_by: sortByQuery,
                 order: orderQuery,
                 limit: limitQuery,
-                p: pageQuery
-            };
-        });
-
-        fetchArticles(topicQuery, sortByQuery, orderQuery)
-        .then((articlesData) => {
-
-            setArticles(articlesData);
+                p: currentPage
+            });
             setIsLoading(false);
         })
         .catch((err) => {
@@ -48,66 +45,7 @@ const Articles = () => {
                 message: err.response.data.msg
             });
         })
-    }, [topicQuery, sortByQuery, orderQuery]);
-
-    useEffect(() => {
-
-        setIsLoading(true);
-        setPageQuery(1);
-        setSearchParams(() => {
-            return {
-                ...(topicQuery) && { topic: topicQuery },
-                sort_by: sortByQuery,
-                order: orderQuery,
-                limit: limitQuery,
-                p: 1
-            };
-        });
-
-        fetchArticles(topicQuery, sortByQuery, orderQuery, limitQuery)
-        .then((articlesData) => {
-
-            setArticles(articlesData);
-            setIsLoading(false);
-        })
-        .catch((err) => {
-
-            setErrorInfo({
-                ...errorInfo,
-                status: err.response.status,
-                message: err.response.data.msg
-            });
-        });
-    }, [limitQuery]);
-
-    useEffect(() => {
-
-        setIsLoading(true);
-        setSearchParams(() => {
-            return {
-                ...(topicQuery) && { topic: topicQuery },
-                sort_by: sortByQuery,
-                order: orderQuery,
-                limit: limitQuery,
-                p: pageQuery
-            };
-        });
-
-        fetchArticles(topicQuery, sortByQuery, orderQuery, limitQuery, pageQuery)
-        .then((articlesData) => {
-
-            setArticles(articlesData);
-            setIsLoading(false);
-        })
-        .catch((err) => {
-
-            setErrorInfo({
-                ...errorInfo,
-                status: err.response.status,
-                message: err.response.data.msg
-            });
-        });
-    }, [pageQuery]);
+    }, [topicQuery, sortByQuery, orderQuery, limitQuery, currentPage]);
 
     useEffect(() => {
 
@@ -117,15 +55,9 @@ const Articles = () => {
         });
     }, []);
 
-    const handlePageChange = (totalArticles, pageChange) => {
-
-        if(pageQuery <= Math.ceil(totalArticles / limitQuery)) {
-            setPageQuery(+pageQuery + pageChange);
-        }
+    const handlePageChange = (pageIncrement) => {
+        setCurrentPage(currentPage + pageIncrement);
     }
-
-    let numOfArticles = 0;
-    if (articles.length !== undefined) numOfArticles = articles.length;
 
     if(Object.keys(errorInfo).length !== 0) return <Error status={errorInfo.status} message={errorInfo.message}/>
 
@@ -133,7 +65,7 @@ const Articles = () => {
     ? <Loading />
     : (
         <section className="article-page">
-            <h3 className="articles-heading">Displaying {numOfArticles} of {articles[0].total_count} articles for {topicQuery || "all topics"}</h3>
+            <h3 className="articles-heading">Displaying {articles.length || 0} of {articles[0].total_count || 0} articles for {topicQuery || "all topics"}</h3>
             <div className="drop-down-menus">
                 <div className="topic-drop-down">
                     <label htmlFor="topic-select" id="topic-label">Topics</label>
@@ -176,12 +108,12 @@ const Articles = () => {
                 </div>
                 <div className="page-limit-container">
                     <div className="page-options-container">
-                        <button id="left-page-button" disabled={pageQuery === 1} onClick={() => {
-                            handlePageChange(articles[0].total_count, -1);
+                        <button id="left-page-button" disabled={currentPage === 1} onClick={() => {
+                            handlePageChange(-1);
                         }}>←</button>
-                        <p id="page-text">Page {pageQuery} / {Math.ceil(articles[0].total_count / limitQuery)}</p>
-                        <button id="right-page-button" disabled={pageQuery === Math.ceil(articles[0].total_count / limitQuery)} onClick={() => {
-                            handlePageChange(articles[0].total_count, 1);
+                        <p id="page-text">Page {currentPage} / {totalPages}</p>
+                        <button id="right-page-button" disabled={currentPage === totalPages} onClick={() => {
+                            handlePageChange(1);
                         }}>→</button>
                     </div>
                     <div className="limit-drop-down">
@@ -205,6 +137,15 @@ const Articles = () => {
                     return <ArticleCard key={article.article_id} article={article} setTopicQuery={setTopicQuery} />
                 })}
             </ul>
+            <div className="bottom-page-options-container">
+                <button id="left-page-button" disabled={currentPage === 1} onClick={() => {
+                    handlePageChange(-1);
+                }}>←</button>
+                <p id="page-text">Page {currentPage} / {totalPages}</p>
+                <button id="right-page-button" disabled={currentPage === totalPages} onClick={() => {
+                    handlePageChange(1);
+                }}>→</button>
+            </div>
         </section>
     )
 }
