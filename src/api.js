@@ -4,7 +4,7 @@ const newsApi = axios.create({
     baseURL: "https://nc-news-yemz.onrender.com/api"
 });
 
-export const fetchArticles = (topicQuery = "", sortByQuery = "", orderQuery = "", limitQuery = 10, pageQuery = 1) => {
+export const fetchArticles = (topicQuery = "", sortByQuery, orderQuery, limitQuery, pageQuery) => {
 
     const params = { 
         topic: topicQuery,
@@ -16,8 +16,8 @@ export const fetchArticles = (topicQuery = "", sortByQuery = "", orderQuery = ""
 
     return newsApi
     .get('/articles', { params })
-    .then(({ data: { articles } }) => {
-        return articles;
+    .then(({ data }) => {
+        return data;
     });
 }
 
@@ -52,12 +52,12 @@ export const patchArticleById = (article_id, increment) => {
     });
 }
 
-export const fetchCommentsByArticleId = (article_id) => {
+export const fetchCommentsByArticleId = (article_id, pageQuery) => {
 
     return newsApi
-    .get(`/articles/${article_id}/comments`)
-    .then(({ data: { comments } }) => {
-        return comments;
+    .get(`/articles/${article_id}/comments`, { params: { p: pageQuery } })
+    .then(({ data }) => {
+        return data;
     });
 }
 

@@ -50,7 +50,7 @@
     background-color: #01dab6;
     border-radius: 0.2em;
     color: #01257D;
-    padding: 0.2em;
+    padding: 0.5em;
     text-decoration: none;
     grid-area: home;
 }
@@ -65,7 +65,7 @@
     background-color: #01dab6;
     border-radius: 0.2em;
     color: #01257D;
-    padding: 0.2em;
+    padding: 0.5em;
     grid-area: article;
     text-decoration: none;
 }
@@ -80,7 +80,7 @@
     background-color: #01dab6;
     border-radius: 0.2em;
     color: #01257D;
-    padding: 0.2em;
+    padding: 0.5em;
     grid-area: user;
     text-decoration: none;
 }
@@ -111,6 +111,7 @@
 .home-heading {
     text-align: center;
     border-bottom: 2px solid #01257D;
+    padding: 0.3em;
 }
 
 /* Trending Articles */
@@ -195,6 +196,7 @@
     text-align: center;
     border-bottom: 2px solid #01257D;
     grid-area: heading;
+    padding: 0.3em;
 }
 
 .article-card-list {
@@ -264,6 +266,16 @@
     padding: 0.2em;
     display: flex;
     flex-direction: row;
+}
+
+.bottom-page-options-container {
+    margin: 0.3em;
+    padding: 0.2em;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 #left-page-button {
@@ -380,6 +392,7 @@
     text-align: center;
     border-bottom: 0.1em solid #01257D;
     margin-bottom: 0;
+    padding: 0.3em;
 }
 
 .single-article-header-info {
@@ -538,6 +551,15 @@
     font-style: normal;
 }
 
+.comment-page-options-container {
+    margin: 0.3em;
+    padding: 0.2em;
+    margin-right: auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
 
 /* CommentCard */
 #delete-error-message {
