@@ -62,6 +62,15 @@ const Comments = (props) => {
             {comments.map((comment, index) => {
                 return <CommentCard key={handleCommentKey(comment, index)} comment={comment} setComments={setComments}/>
             })}
+            <div className="comment-page-options-container">
+                <button id="left-page-button" disabled={currentPage === 1} onClick={() => {
+                    handlePageChange(-1);
+                }}>←</button>
+                <p id="page-text">Page {currentPage} / {totalPages}</p>
+                <button id="right-page-button" disabled={currentPage === totalPages} onClick={() => {
+                    handlePageChange(1);
+                }}>→</button>
+            </div>
         </section>
     )
 }
