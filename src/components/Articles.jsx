@@ -122,6 +122,7 @@ const Articles = () => {
                             id="limit-select"
                             value={limitQuery}
                             onChange={(event) => {
+                                setCurrentPage(1);
                                 setLimitQuery(event.target.value);
                             }}>
                                 <option value={10}>10</option>
