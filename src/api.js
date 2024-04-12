@@ -1,122 +1,122 @@
-import axios from 'axios';
+import axios from "axios";
 
 const newsApi = axios.create({
-    baseURL: "https://nc-news-yemz.onrender.com/api"
+  baseURL: "https://nc-news-yemz.onrender.com/api",
 });
 
 export const fetchArticles = (topicQuery = "", sortByQuery, orderQuery, limitQuery, pageQuery) => {
 
-    const params = { 
-        topic: topicQuery,
-        sort_by: sortByQuery,
-        order: orderQuery,
-        limit: limitQuery,
-        p: pageQuery 
-    };
+  const params = {
+    topic: topicQuery,
+    sort_by: sortByQuery,
+    order: orderQuery,
+    limit: limitQuery,
+    p: pageQuery,
+  };
 
-    return newsApi
-    .get('/articles', { params })
-    .then(({ data }) => {
-        return data;
+  return newsApi
+    .get("/articles", {params})
+    .then(({data}) => {
+      return data;
     });
-}
+};
 
 export const fetchTopics = () => {
 
-    return newsApi
-    .get('/topics')
-    .then(({ data: { topics } }) => {
-        return topics;
+  return newsApi
+    .get("/topics")
+    .then(({data: {topics}}) => {
+      return topics;
     });
-}
+};
 
 export const fetchArticleById = (article_id) => {
 
-    return newsApi
+  return newsApi
     .get(`/articles/${article_id}`)
-    .then(({ data: { article } }) => {
-        return article;
+    .then(({data: {article}}) => {
+      return article;
     });
-}
+};
 
 export const patchArticleById = (article_id, increment) => {
 
-    const patchBody = {
-        inc_votes: increment
-    };
+  const patchBody = {
+    inc_votes: increment,
+  };
 
-    return newsApi
+  return newsApi
     .patch(`/articles/${article_id}`, patchBody)
-    .then(({ data: { article } }) => {
-        return article;
+    .then(({data: {article}}) => {
+      return article;
     });
-}
+};
 
 export const fetchCommentsByArticleId = (article_id, pageQuery) => {
 
-    return newsApi
-    .get(`/articles/${article_id}/comments`, { params: { p: pageQuery } })
-    .then(({ data }) => {
-        return data;
+  return newsApi
+    .get(`/articles/${article_id}/comments`, {params: {p: pageQuery}})
+    .then(({data}) => {
+      return data;
     });
-}
+};
 
 export const postCommentByArticleId = (article_id, commentBody, user) => {
-    
-    const postBody = {
-        username: user.username,
-        body: commentBody
-    }
 
-    return newsApi
+  const postBody = {
+    username: user.username,
+    body: commentBody,
+  };
+
+  return newsApi
     .post(`/articles/${article_id}/comments`, postBody)
-    .then(({ data: { comment } }) => {
-        return comment;
+    .then(({data: {comment}}) => {
+      return comment;
     });
-}
+};
 
 export const patchCommentByCommentId = (comment_id, increment) => {
 
-    const patchBody = {
-        inc_votes: increment
-    }
+  const patchBody = {
+    inc_votes: increment,
+  };
 
-    return newsApi
+  return newsApi
     .patch(`/comments/${comment_id}`, patchBody)
-    .then(({ data: { comment } }) => {
-        return comment;
+    .then(({data: {comment}}) => {
+      return comment;
     });
-}
+};
 
 export const deleteCommentByCommentId = (comment_id) => {
 
-    return newsApi
-    .delete(`/comments/${comment_id}`)
-}
+  return newsApi
+    .delete(`/comments/${comment_id}`);
+};
 
 export const fetchUsers = () => {
 
-    return newsApi
-    .get('/users')
-    .then(({ data: { users } }) => {
-        return users;
-    })
-}
+  return newsApi
+    .get("/users")
+    .then(({data: {users}}) => {
+      return users;
+    });
+};
 
 export const fetchUserByUsername = (username) => {
 
-    return newsApi
+  return newsApi
     .get(`/users/${username}`)
-    .then(({ data: { user } }) => {
-        return user;
+    .then(({data: {user}}) => {
+      return user;
     });
-}
+};
 
 export const fetchCommentsByUsername = (username) => {
 
-    return newsApi
+  return newsApi
     .get(`/users/${username}/comments`)
-    .then(({ data: { comments } }) => {
-        return comments;
+    .then(({data: {comments}}) => {
+      return comments;
     });
-}
+};
